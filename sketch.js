@@ -11,6 +11,12 @@ var offset=0;
 var easing= 0.05;
 var theta= 0;
 var s= 10;
+var textline=[
+"I cannot touch the sun,",
+"but that will not keep me from appreciating the sunset...",
+];
+var x; 
+var index=0;
 
 function preload(){ // preload kiss image
 	img = loadImage('data/kiss1.jpg');
@@ -27,9 +33,10 @@ function preload(){ // preload kiss image
 function setup(){ //set width and height to window, image in background, 
 	createCanvas (windowWidth, windowHeight);
 	//img.loadPixels();
-	c= img3.get (img3.width.random, img3.height.random);
+	c= img.get (775, 15);
 	background (c);
 	textFont("Palatino");
+	x=width;
 }
 function draw (){ 
 	//pointillize= random (2, 20); // random dots
@@ -38,8 +45,34 @@ function draw (){
 	/*if (frameCount> 200){
 		image(img3, 0, 0, mouseX*2, mouseY*2);// image distorts to cursor
 	}*/
+
+	//fill(img.get(600,200));
+	var i= 255;
+	fill (i);
+	textSize(30)
+	textAlign(LEFT);
 	
-	if (frameCount>400){ //sliding silliness
+	if (frameCount<500){
+		x=width/5;
+		var y= height-100;}
+		else if(frameCount %20===0){
+			x= random(0, width);
+			y= random(height-100, height);
+	}
+	text("I cannot touch the sun, but that will not keep me from appreciating the sunset...", x, y);
+	var i= 255;
+	fill (i);
+	i-=0.01;
+	
+	//x-=3;
+
+	/*var w= textWidth(textline[index]);
+	if (x<-w){
+		x=width;
+	}
+	index=(index +1) % textline.length;*/
+	
+	if (frameCount>2500){ //sliding silliness
 		b= img4.get (100, 500);
 		background (b); // get tan background
 		image (img5, 0, 0);// set image at left side
@@ -49,7 +82,7 @@ function draw (){
 		image(img4, 0, offset); //image 4 moves up and down along y axis
 	}
 
-	if (frameCount>500){// images move with mouse X and mouse Y positions
+	if (frameCount>2000){// images move with mouse X and mouse Y positions
 		image(img6, mouseX, 0);
 		image(img7, mouseX, offset);
 		fill (169,255, 254);
@@ -62,17 +95,18 @@ function draw (){
 		rotate(theta);
 		text("if you find yourself daydreaming, know that I am dreaming of you...", 0, 0);
 		pop();
-		if (text>width){
-		s-=0.5;
+		if (s>=40){
+		s-=2;
+		
 		}
+}
+theta+=0.05;
 
-	}
-	theta+=0.02;
-	
 }
 
+
 function pointPaint(){
-	pointillize= random (2, 20); // random dots
+	pointillize= random (10, 30); // random dots
 	//background (c);
 	//image (img, 50, 50);
 
