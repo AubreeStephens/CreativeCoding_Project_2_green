@@ -9,6 +9,8 @@ var maxImages=7;
 var images= new Array (maxImages);
 var offset=0;
 var easing= 0.05;
+var theta= 0;
+var s= 10;
 
 function preload(){ // preload kiss image
 	img = loadImage('data/kiss1.jpg');
@@ -27,27 +29,46 @@ function setup(){ //set width and height to window, image in background,
 	//img.loadPixels();
 	c= img3.get (img3.width.random, img3.height.random);
 	background (c);
+	textFont("Palatino");
 }
 function draw (){ 
 	//pointillize= random (2, 20); // random dots
+	
 	pointPaint();
-	if (frameCount> 200){
+	/*if (frameCount> 200){
 		image(img3, 0, 0, mouseX*2, mouseY*2);// image distorts to cursor
-	}
+	}*/
+	
 	if (frameCount>400){ //sliding silliness
 		b= img4.get (100, 500);
-		background (b);
-		image (img5, 0, 0);
-		var dy= (mouseY-img5.height/2)- offset;
-		offset+=  dy * easing;
-		tint (255, 200);
-		image(img4, 0, offset);
-	}
-	if (frameCount>600){
-		image(img6, 600, 0);
-		image(img7, 600, mouseY*-1);
+		background (b); // get tan background
+		image (img5, 0, 0);// set image at left side
+		var dy= (mouseY-img5.height/1.5)- offset; // dy is (mouseY- 1/4 of image height)- offset
+		offset+=  dy * easing; //offset is dy* 0.5
+		tint (255, 200); // mostly transparent
+		image(img4, 0, offset); //image 4 moves up and down along y axis
 	}
 
+	if (frameCount>500){// images move with mouse X and mouse Y positions
+		image(img6, mouseX, 0);
+		image(img7, mouseX, offset);
+		fill (169,255, 254);
+		//rotate text about itself
+		textAlign(CENTER); 
+		textSize(s);
+		s+=0.1;
+		push();
+		translate (width/2, height/2);
+		rotate(theta);
+		text("if you find yourself daydreaming, know that I am dreaming of you...", 0, 0);
+		pop();
+		if (text>width){
+		s-=0.5;
+		}
+
+	}
+	theta+=0.02;
+	
 }
 
 function pointPaint(){
