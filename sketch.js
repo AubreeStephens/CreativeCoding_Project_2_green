@@ -29,6 +29,8 @@ function preload(){ // preload kiss image
 	img5= loadImage('data/ferry3.png');
 	img6= loadImage('data/ferry4.png');
 	img7= loadImage('data/ferry5.png');
+	img8= loadImage('data/ferry6.png');//silly
+	img9= loadImage('data/ferry7.png');// adoration
 }
 function setup(){ //set width and height to window, image in background, 
 	createCanvas (windowWidth, windowHeight);
@@ -42,16 +44,14 @@ function draw (){
 	//pointillize= random (2, 20); // random dots
 	
 	pointPaint();
-	/*if (frameCount> 200){
-		image(img3, 0, 0, mouseX*2, mouseY*2);// image distorts to cursor
-	}*/
+	
 
 	//fill(img.get(600,200));
 	var i= 255;
 	fill (i);
 	textSize(30)
 	textAlign(LEFT);
-	
+	// start at position, incrementall add text to bottomr of screen
 	if (frameCount<500){
 		x=width/5;
 		var y= height-100;}
@@ -72,7 +72,7 @@ function draw (){
 	}
 	index=(index +1) % textline.length;*/
 	
-	if (frameCount>2500){ //sliding silliness
+	if (frameCount>2200){ //sliding silliness
 		b= img4.get (100, 500);
 		background (b); // get tan background
 		image (img5, 0, 0);// set image at left side
@@ -102,10 +102,39 @@ function draw (){
 }
 theta+=0.05;
 
+if (frameCount>2300){
+	image(img8, 500, 0);
+	image(img9, mouseX-600, offset);}
+
+/*if (frameCount>2500){
+	background(img3.get(375, 300));
+		image(img3, 0, 0, mouseX*2, mouseY*2);// image distorts to cursor
+}*/
+
+
+if (frameCount>2500){
+	frameRate(3); //slow down to see text
+	background (img.get (775, 15));
+	tint(255, 100);// mostly transparent
+	image(img2, 0, 0);// initial pointillized image
+	pointPaint();
+	var x= random(windowWidth);
+	var y= random(windowHeight);
+	fill (255);
+	textSize(random(20,30));
+	if (frameCount % 20===1){text("you are the star that radiates brighter in the distance", x, y)};
+	if (frameCount % 20===5){text ("like the night that seems further each moment", x, y);}
+	if (frameCount% 20===9){text("I will wait for you to catch up in orbit", x, y);}
+	//noLoop();
+
+
+}
 }
 
 
 function pointPaint(){
+//from Shiffman Learning Processing, Example 15_14
+
 	pointillize= random (10, 30); // random dots
 	//background (c);
 	//image (img, 50, 50);
